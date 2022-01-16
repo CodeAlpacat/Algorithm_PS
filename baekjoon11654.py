@@ -1,1 +1,3 @@
-#테스트
+N = input()
+
+print(ord(N))
