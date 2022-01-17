@@ -1,3 +1,4 @@
+#숫자의 합
 N = int(input())
 X = input()
 
