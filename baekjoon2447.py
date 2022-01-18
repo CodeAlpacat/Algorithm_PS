@@ -1,4 +1,5 @@
 #별 찍기 - 10 (재귀)
+#사실 못풀겠음 이거
 
 def draw_star(n) :
     global Map
