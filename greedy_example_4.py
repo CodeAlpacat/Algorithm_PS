@@ -5,7 +5,7 @@
 #모험가 N명과 N이하의 자연수를 두 번째 줄에 각 모험가의 공포도의 값을 공백 단위로 입력.
 
 #풀이 -> 공포도가 높을수록 사람을 많이 요구하므로 공포도가 높은 사람부터 계산 (그리디 알고리즘)
-
+'''
 N = int(input())
 
 num_fear = list(map(int, input().split()))#N명 만큼 모험가의 공포도를 입력받음
@@ -19,5 +19,21 @@ for i in sorted_fear:
         break
     else:
         people_left = people_left - i # i는 공포도이므로 사람 수만큼 빼준다.
-        count +=1 # 그룹 1개 생성.
-    
+        count +=1 # 그룹 1개 생성. 
+'''
+
+N = int(input())
+
+data = list(map(int, input().split()))
+data.sort()
+
+result = 0 #그룹의 수
+count = 0 #현재 그룹에 포함된 모험가의 수
+
+for i in data: #공포도를 낮은 순으로 확인하며, 공포도보다 모험가 수가 같거나 많다면, 그룹의 수를 +1하고 현재 그룹원을 0으로 초기화.
+    count += 1
+    if count >= i:
+        result += 1
+        count = 0
+print(result)
+
