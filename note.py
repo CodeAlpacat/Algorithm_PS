@@ -1,13 +1,4 @@
-def snail(height, day, night):
-    
-
-    if height <= 0: # 낮에 다 올라버리면 밤에 흘러내릴 필요가 없음.
-        return count
-    else:
-        pass
-    
-    return snail(height,)
-
-    
-# 해당 코드를 통해 올바른 결과가 나오는지 확인하시오.
-print(snail(100, 5, 2))
+#하노이의 탑
+#재귀를 이용해 풀어야한다. N을 입력받고 출력할 때, 첫 째줄엔 총 옮겨야하는 횟수, 그리고 옮기는 순서를 출력해야한다.
+#N = 5
+print(4)
