@@ -26,7 +26,7 @@ for _ in range(student_num):
         else:
             switch[switch_num_student-1] = 0
         if switch_num_student in range(2, len(switch)-1): #맨 끝과 시작을 제외해야 홀수 개.
-            for i in range(len(switch)//2+1):          
+            for i in range(len(switch)//2):          
                 if switch[switch_num_student-i-2] == switch[switch_num_student+i]: #양 옆의 수
                     
                     if switch[switch_num_student-i-2] == 0:
@@ -53,5 +53,6 @@ for _ in range(student_num):
                 switch[len(switch)-1] = 0
 
 for i in range(len(switch)):
-    print(switch[i], end = ' ')
-    
+    print(switch[i], end = " ")
+    if i % 20 ==0:
+        print()
