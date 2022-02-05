@@ -54,4 +54,39 @@ for _ in range(student_num):
 
 for i in range(len(switch)):
     print(switch[i], end = ' ')
-    
+# 아래와 무엇이 다를지 생각해보자.
+
+# def change(num):
+#     if switch[num] == 0:
+#         switch[num] = 1
+#     else:
+#         switch[num] = 0
+#     return
+
+
+# N = int(input())
+# switch = [-1] + list(map(int, input().split()))
+# students = int(input())
+# for _ in range(students):
+#     gender, num = map(int, input().split())
+#     # 남자
+#     if gender == 1:
+#         for i in range(num, N+1, num):
+#             change(i)
+#     # 여자
+#     else:
+#         change(num)
+#         k = 1
+#         while True:
+#             if num + k > N or num - k < 1 : break
+#             if switch[num + k] == switch[num - k]:
+#                 change(num + k)
+#                 change(num - k)
+#             else:
+#                 break
+#             k += 1
+                
+# for i in range(1, N+1):
+#     print(switch[i], end = " ")
+#     if i % 20 == 0 :
+#         print()
