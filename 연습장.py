@@ -1,38 +1,32 @@
-#부녀회장이 될테야
-N = int(input())
-result_list = []
-for i in range(N):
-    K, n = int(input()), int(input())
-    # 0~k층까지이므로 k층포함
-    # 호수는 1부터 시작 N까지 반복
-    arr = [[0 for _ in range(15)] for _ in range(15)]
-    for j in range(K+1):
-        for k in range(1,n+1):
-            if j == 0:
-                arr[j][k] = k
-            else: #j-1층의 k호까지의 합
-                for g in range(1, k+1):
-                    arr[j][k] += arr[j-1][g]
-    result_list.append(arr[K][n])
+for ts in range(10):
+    dump = int(input())
+    box = list(map(int, input().split()))
+    height_check = [0] * 101
 
-for i in result_list:
-    print(i)
+    H = box[0]
+    L = box[0]
 
-# tcs = int(input())
-# memo = [[0] * 15 for _ in range(15)]
-# for tc in range(tcs):
-#     r = int(input())
-#     c = int(input())
+    # 최고 높이, 최저 높이 설정 및 높이별 갯수 저장
 
-#     def func(r, c):
-#         if r == 0 or c == 1:
-#             memo[r][c] = c
-#             return c
+    for height in box:
+        height_check[height] += 1
+        if H < height:
+            H = height
+        if L > height:
+            L = height
 
-#         if memo[r][c]: return memo[r][c]
+    while dump > 0:
+        if L >= H:
+            break
+        height_check[L] -= 1
+        height_check[H] -= 1
+        height_check[L + 1] += 1
+        height_check[H - 1] += 1
+        if height_check[L] == 0:
+            L += 1
+        if height_check[H] == 0:
+            H -= 1
 
-#         memo[r][c] = func(r-1, c) + func(r, c-1)
-#         return memo[r][c]
+        dump -= 1
 
-#     print(func(r, c))
-
+    print("#{} {}".format(ts + 1, H - L))

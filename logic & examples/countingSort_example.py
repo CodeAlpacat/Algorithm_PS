@@ -35,3 +35,7 @@ def Counting_Sort(A, k):
     for i in range(len(B)-1, -1, -1):
         C[A[i]] -= 1
         B[C[A[i]]] = A[i]
+    return B
+
+arr = [3, 5, 1, 2, 9, 6, 4, 7, 5, 1, 1, 1]
+print(Counting_Sort(arr, 20))
