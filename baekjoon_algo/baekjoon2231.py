@@ -18,6 +18,29 @@ for i in range(1, N+1):
     #생성자가 없는 경우는 생성자가 N을 탐색못하고 지나쳤을 때,
     if i == N:
         print(0)
+
+# #분해합
+# #1~9 -> 자기스스로
+# #10 -> 11 -> 13 이렇게 i의 분해합을 쭉 지나 N이 될때까지 찾는다.
+
+# N = int(input())
+
+# def div(n):
+
+#     v = n
+#     while n > 0:
+#        v +=  n % 10
+#        n //= 10 
+#     return v
+
+
+# for i in range(1, N+1):
+#     if div(i) == N:
+#         print(i)
+#         break
+#     if i == N:
+#         print(0)
+
     
 
 
