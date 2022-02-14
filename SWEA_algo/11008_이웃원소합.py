@@ -16,7 +16,7 @@ for x in range(T):
                 x = i + dx[k]
                 y = j + dy[k]
                 if 0 <= x < N and 0 <= y < N:
-                    li_max += li[x][y] # 이웃 전부 더함.
+                    li_max += li[x][y] # 이웃 전부 더함. 자기 자신 제외.
             if li_max > max_num:
                 max_num = li_max
                 x_max = i

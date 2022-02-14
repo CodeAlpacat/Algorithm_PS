@@ -11,3 +11,6 @@ def select_sort(list_num):
     return list_num
  
 print(select_sort([2, 4, 5, 1, 3, 4, 7, 30]))
+
+
+
