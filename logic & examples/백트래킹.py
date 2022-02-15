@@ -4,16 +4,16 @@
 n, m = map(int,input().split())
 arr = [0 for i in range(n)]
 # 템플릿 약간 변형함.
-def recur(cur, N, M, arr_2): #cur = 종료 조건 / N = 자릿수/ M = 진수 / N자릿수 배열
-    if cur == N:
-        print(*arr_2)
+def recur(cur): #cur = 종료 조건 / N = 자릿수/ M = 진수 / N자릿수 배열
+    if cur == n:
+        print(*arr)
         return
 
-    for i in range(M):
-        arr_2[cur] = i
-        recur(cur+1, N, M, arr_2) #cur + 1로 n까지
+    for i in range(m):
+        arr[cur] = i
+        recur(cur+1) #cur + 1로 n까지
 
-recur(1, n, m, arr)
+recur(0)
 
 
 #2번 템플릿 /순열 중복제거
@@ -30,8 +30,11 @@ def recur(cur):
     for i in range(n):
         if visited[i]:
             continue
-
+        
         arr2[cur] = i
+        visited[i] = True
+        recur(cur + 1)
+        visited[i] = False
 
 #반복문을 충분히 쌓고 뭐할지가 if문 아래 들어감
 # for i in range(n):
