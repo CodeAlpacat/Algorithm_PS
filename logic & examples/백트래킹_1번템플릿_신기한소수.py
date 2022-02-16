@@ -22,13 +22,13 @@ def check(n):
         
         if n%i ==0:
             cnt += 1
-    return n == 0 or cnt == 2        
+    return n == 0 or cnt == 1
 
 def recur(cur,num):
     # 두전째 생각 재귀 들어가고 처리 cur = 0 인 경우 예외처리
-    # 가지치기
-    if cur!= 0 not check(num):
-        return 
+    # 가지치기 / 잘못들어가면 나와라 조건
+    if cur!= 0 and not check(num):
+        return
 
     # 기저
     if cur == n:
