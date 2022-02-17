@@ -27,15 +27,6 @@ for x in range(T):
 
             if same(ans_col):
                 result_list.append(ans_col)
-        
-    
-        # for j in range(M):
-        #     new_str = []
-        #     for k in range(N):
-        #         new_str.append(M_li[k][j])
-        #     str_n = ''.join(new_str)
-        #     if same(str_n):
-        #         result_list.append(str_n)
 
 for i in range(len(result_list)):
     print(f'#{i+1} {result_list[i]}')
