@@ -45,23 +45,16 @@
 # # 1 2 3 4 5 6 7 8 9 10
 # # s
 # #     e
+def sum_li(arr):
+    total = 0
+    for i in arr:
+        if type(i) == list:
+            for j in i:
+                total += j
+        else:
+            total += i
+    return total
 
-
-def countingsort(a, k):
-    b = [0] * (k+1)
-    c = [0] * len(a) #결과 저장할 값
-    
-    for i in range(len(a)):
-        b[a[i]] += 1
-    
-    for i in range(1, len(b)):
-        b[i] += b[i-1]
-    
-    for i in range(len(c)-1, -1, -1):
-        b[a[i]] -= 1
-        c[b[a[i]]] = a[i]
-    return c
-
-arr = [3, 5, 1, 2, 9, 6, 4, 7, 5, 1, 1, 1]
-
-print(countingsort(arr, 100))
+arr_1 = [[1, 3, 2, 1, 3], [3, 1, 3, 2, 1], [3, 3, 1, 1, 2], [1, 3, 2, 2, 1], [1, 2, 3, 3, 2]]
+arr_2 = arr_1[0:2][0:2]
+print(arr_2)
