@@ -45,16 +45,5 @@
 # # 1 2 3 4 5 6 7 8 9 10
 # # s
 # #     e
-def sum_li(arr):
-    total = 0
-    for i in arr:
-        if type(i) == list:
-            for j in i:
-                total += j
-        else:
-            total += i
-    return total
-
-arr_1 = [[1, 3, 2, 1, 3], [3, 1, 3, 2, 1], [3, 3, 1, 1, 2], [1, 3, 2, 2, 1], [1, 2, 3, 3, 2]]
-arr_2 = arr_1[0:2][0:2]
-print(arr_2)
+a = ['a', 'b', 'c', 'a']
+print(a.count('a'))
