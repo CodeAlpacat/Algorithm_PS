@@ -2,7 +2,6 @@
 import sys
 N = int(input())
 li = list(map(int, input().split()))
-li.sort()
 s = 0
 e = N-1
 idx_s = 0
