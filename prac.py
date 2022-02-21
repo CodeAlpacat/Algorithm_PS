@@ -1,21 +1,23 @@
-#파스칼의 삼각형
+#반복문자 지우기
 
 T = int(input())
 
-for x in range(T):
-    N = int(input())
-    li = [[0] * N for _ in range(N)]
-    li[0][0] = 1
-    for i in range(N):
-        li[i][0] = 1
-        li[i][i] = 1
+def same(arr):
     
-    for i in range(N):
-        for j in range(N):
-            if li[i][j] != 1:
-                li[i][j] = li[i-1][j-1] + li[i-1][j]
-    print(f'#{x+1}')
-    for i in range(N):
-        for j in range(i+1):
-            print(li[i][j], end = ' ')
-        print()
+    for i in range(1, len(arr)):
+        if arr[i] == arr[i-1]:
+            break
+    else:
+        return arr
+
+    for i in range(1, len(arr)):
+        if arr[i] == arr[i-1]:
+            arr[i] = ''
+            arr[i-1] = ''
+    return same(list(''.join(arr)))
+
+
+for x in range(T):
+    li = list(input())
+
+    print(f'#{x+1} {len(same(li))}')

@@ -1,5 +1,5 @@
 #파스칼의 삼각형
-
+#백트래킹으로 풀어보기
 T = int(input())
 
 for x in range(T):
