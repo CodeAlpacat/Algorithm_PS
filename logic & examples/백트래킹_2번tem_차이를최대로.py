@@ -21,9 +21,9 @@ def recur(cur):
             continue
 
         arr2[cur] = arr[i]
-        visited[i] = True
+        visited[i] = True # 이전 값들의 중복을 True로 바꿔 제거한다. 앞의 continue 문0
         recur(cur + 1)
-        visited[i] = False
+        visited[i] = False # 다시 초기화
 
 recur(0) #0부터 중복제거한 전체 탐색
 

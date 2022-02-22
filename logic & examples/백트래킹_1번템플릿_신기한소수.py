@@ -27,7 +27,7 @@ def check(n):
 def recur(cur,num):
     # 두전째 생각 재귀 들어가고 처리 cur = 0 인 경우 예외처리
     # 가지치기 / 잘못들어가면 나와라 조건
-    if cur!= 0 and not check(num):
+    if not check(num):
         return
 
     # 기저
@@ -41,4 +41,4 @@ def recur(cur,num):
         #if check(10*num+i):
 	    #    recur(cur+1,10*num+i)
         recur(cur+1,10*num+i)
-recur(0,0)    	
+recur(0,0)
