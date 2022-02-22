@@ -19,3 +19,20 @@ for x in range(T):
         for j in range(i+1):
             print(li[i][j], end = ' ')
         print()
+
+# ------------------------------------------------- DP 조합
+memo = [[0] * 100 for _ in range(100)]
+
+def recur(cur, cnt):
+    
+    if memo[cur][cnt]:
+        return memo[cur][cnt]
+
+    if cur == cnt or cnt == 0:
+        memo[cur][cnt] = 1
+        return 1
+
+    memo[cur][cnt] = recur(cur - 1, cnt - 1) + recur(cur - 1, cnt) #안고르는 경우
+    return memo[cur][cnt]
+
+recur(4, 4)
