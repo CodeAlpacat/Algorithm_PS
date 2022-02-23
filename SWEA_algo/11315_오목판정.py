@@ -1,5 +1,5 @@
 
-for t in range(1):
+for t in range(10):
     N = int(input())
     li = [list(map(int, input().split())) for _ in range(100)]
     

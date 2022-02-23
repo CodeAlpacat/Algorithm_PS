@@ -10,7 +10,7 @@ def recur(cur): #cur = 종료 조건 / N = 자릿수/ M = 진수 / N자릿수 �
         return
 
     for i in range(m):
-        arr[cur] = i
+        arr[cur] = i #i는 인덱스 번호나 다름 없음. arr2[i]를 입력넣어도댐.
         recur(cur+1) #cur + 1로 n까지
 
 recur(0)

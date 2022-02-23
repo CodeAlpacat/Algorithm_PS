@@ -39,4 +39,3 @@ res = sorted(check(N))
 print(len(res)-1)
 for i in range(1, len(res)):
     print(res[i])
-
