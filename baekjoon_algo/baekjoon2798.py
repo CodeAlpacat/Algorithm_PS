@@ -24,3 +24,64 @@ for i in range(N):
                 result = max(result, pick_card[i] + pick_card[j] + pick_card[k])
 
 print(result)
+
+
+
+
+#블랙잭 백트래킹 조합(중복x)
+
+N, M = map(int, input().split())
+li = list(map(int, input().split()))
+ans = 0
+
+def recur(cur, cnt, a):
+    global ans
+
+    if cnt == 3:
+        if M >= a and abs(M-ans) > abs(M-a):
+            ans = a
+            return
+    elif cnt > 3:
+        return
+
+    if cur == N:
+        return
+    
+    recur(cur+1, cnt+1, a + li[cur])
+    recur(cur+1, cnt, a)
+
+recur(0, 0, 0)
+
+print(ans)
+
+#블랙잭 2번탬플릿
+
+#블랙잭 백트래킹 조합(중복x)
+
+N, M = map(int, input().split())
+li = list(map(int, input().split()))
+li2 = [0 for i in range(3)]
+visited = [False for i in range(N)]
+max_li = []
+def recur(cur, t):
+
+
+    if cur == 3:
+        if sum(li2) <= M:
+            max_li.append(sum(li2))
+        return
+    
+    for i in range(t, N):
+        if visited[i]:
+            continue
+        
+        li2[cur] = li[i]
+        visited[i] = True
+        recur(cur + 1, i + 1)
+        visited[i] = False
+
+
+recur(0, 0)
+
+print(max(max_li))
+
