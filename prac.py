@@ -1,23 +1,29 @@
-#블랙잭 백트래킹 조합(중복x)
 
-N, M = map(int, input().split())
 li = []
-visited = [False] * (N+1)
-def recur(cur):
-    
-    if cur == M:
-        print(*li)
+total = 0
+for i in range(9):
+    N = int(input())
+    li.append(N)
+    total += N
+ans = 0
+li.sort()
+
+def recur(cur, cnt, a):
+    global ans
+    if cnt > 2:
         return
 
+    if cnt == 2:
+        if total - a - li[cur] == 100:
+            print(li[cur], a)
+            return
 
-    for i in range(1, N+1):
-        if visited[i]:
-            continue
-        
-        li.append(i)
-        visited[i] = True
-        recur(cur+1)
-        visited[i] = False
-        li.pop()
 
-recur(0)
+    if cur == 8:
+        return
+    
+    recur(cur + 1, cnt +1, a + li[cur])
+    recur(cur + 1, cnt, a)
+
+
+recur(0, 0, 0)
