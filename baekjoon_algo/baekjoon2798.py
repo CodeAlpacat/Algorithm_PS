@@ -5,54 +5,55 @@
 
 
 
-N, M = map(int, input().split())
+# N, M = map(int, input().split())
 
-#5장의 카드를 공백 단위로 입력
-pick_card = list(map(int, input().split()))
+# #5장의 카드를 공백 단위로 입력
+# pick_card = list(map(int, input().split()))
 
-result =0
-# 결과를 저장할 result 변수, 0~ N-1까지 탐색, j는 i다음 카드이므로 i+1부터 탐색, k는 j 다음 카드를 뽑아야함.
-for i in range(N):
-    for j in range(i+1, N):
-        for k in range(j+1, N):
-            #서로 중복되지 않는 카드를 완전탐색
-            if pick_card[i] + pick_card[j] + pick_card[k] > M:
-                #M보다 크면 안됨.
-                continue
-            else:
-                # result와 세 카드의 합 비교.
-                result = max(result, pick_card[i] + pick_card[j] + pick_card[k])
+# result =0
+# # 결과를 저장할 result 변수, 0~ N-1까지 탐색, j는 i다음 카드이므로 i+1부터 탐색, k는 j 다음 카드를 뽑아야함.
+# for i in range(N):
+#     for j in range(i+1, N):
+#         for k in range(j+1, N):
+#             #서로 중복되지 않는 카드를 완전탐색
+#             if pick_card[i] + pick_card[j] + pick_card[k] > M:
+#                 #M보다 크면 안됨.
+#                 continue
+#             else:
+#                 # result와 세 카드의 합 비교.
+#                 result = max(result, pick_card[i] + pick_card[j] + pick_card[k])
 
-print(result)
-
-
+# print(result)
 
 
-#블랙잭 백트래킹 조합(중복x)
 
-N, M = map(int, input().split())
-li = list(map(int, input().split()))
-ans = 0
 
-def recur(cur, cnt, a):
-    global ans
+# #블랙잭 백트래킹 조합(중복x)
 
-    if cnt == 3:
-        if M >= a and abs(M-ans) > abs(M-a):
-            ans = a
-            return
-    elif cnt > 3:
-        return
+# N, M = map(int, input().split())
+# li = list(map(int, input().split()))
+# max_li = []
+# ans = 0
 
-    if cur == N:
-        return
+# def recur(cur, cnt, a):
+#     global ans
+
+#     if cnt == 3:
+#         if M >= a and abs(M-ans) > abs(M-a):
+#             ans = a
+#             return
+#     elif cnt > 3:
+#         return
+
+#     if cur == N:
+#         return
     
-    recur(cur+1, cnt+1, a + li[cur])
-    recur(cur+1, cnt, a)
+#     recur(cur+1, cnt+1, a + li[cur])
+#     recur(cur+1, cnt, a)
 
-recur(0, 0, 0)
+# recur(0, 0, 0)
 
-print(ans)
+# print(ans)
 
 #블랙잭 2번탬플릿
 

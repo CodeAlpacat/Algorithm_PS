@@ -1,29 +1,24 @@
-
-li = []
-total = 0
-for i in range(9):
+for t in range(10):
     N = int(input())
-    li.append(N)
-    total += N
-ans = 0
-li.sort()
+    li = list(map(int, input().split()))
+    s = 0
+    minus = 0
+    while True:
+        if li[s] - minus - 1 <= 0:
+            li[s] = 0
+            break
+        li[s] -= (minus + 1)
 
-def recur(cur, cnt, a):
-    global ans
-    if cnt > 2:
-        return
+        minus += 1
+        s += 1
+        minus = minus % 5
+        s = s % len(li)
+    s += 1
+    print(f'#{N}', end =' ')
+    for i in range(len(li)):
+        print(li[s], end = ' ')
+        s += 1
+        s = s % len(li)
+    print()
 
-    if cnt == 2:
-        if total - a - li[cur] == 100:
-            print(li[cur], a)
-            return
-
-
-    if cur == 8:
-        return
-    
-    recur(cur + 1, cnt +1, a + li[cur])
-    recur(cur + 1, cnt, a)
-
-
-recur(0, 0, 0)
+        
