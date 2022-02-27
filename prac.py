@@ -1,30 +1,79 @@
-import sys
-sys.stdin.readline = input
+def check(val):
+    for i in range(len(bingo_map)):
+        for j in range(len(bingo_map)): # 22라면 4, 0
+            if val == bingo_map[i][j]:
+                record_li[i][j] = 1
+                row_check(i)
+                col_check(j)
+                if i == j:
+                    cross_check()
+                if j == 4-i:
+                    rev_cross_check()
+                if sum(bingo) == 3:
+                    return True
+                    
+    else:
+        return False
 
-paper_num = int(input())
-li = [[0] * 1001 for _ in range(1001)]
-cnt = 1
-min_x = 10000000
-min_y = 10000000
-max_width = -11111
-max_height = -11111
-for tc in range(paper_num):
-    x, y, width, height = map(int, input().split())
-    
-    for i in range(x, x+width):
-        for j in range(y, y+height):
-            li[i][j] = cnt
-    cnt += 1
+def row_check(x):
+    cnt = 0
+    for i in range(5):
+        if record_li[x][i] == 1:
+            cnt += 1
+    if cnt == 5:
+        bingo[0] = 1
+        return
+    else:
+        return
 
-    min_x = min(x, min_x)
-    min_y = min(y, min_y)
-    max_width = max(width, max_width)
-    max_height = max(height, max_height)
+def col_check(y):
+    cnt = 0
+    for i in range(5):
+        if record_li[i][y] == 1:
+            cnt += 1
+    if cnt == 5:
+        bingo[1] = 1
+        return
+    else:
+        return
 
-li_paper = [0] * (paper_num+1)
-for i in range(min_x, len(li)):
-    for j in range(min_y, len(li)):
-        li_paper[li[i][j]] += 1
+def cross_check():
+    cnt = 0
+    for i in range(5):
+        if record_li[i][i] == 1:
+            cnt += 1
+    if cnt == 5:
+        bingo[2] = 1
+        return
+    else:
+        return
 
-for i in range(1, len(li_paper)):
-    print(li_paper[i])
+def rev_cross_check():
+    cnt = 0
+    for i in range(5):
+        if record_li[i][4-i] == 1:
+            cnt += 1
+    if cnt == 5:
+        bingo[3] = 1
+        return
+    else:
+        return
+
+
+
+bingo = [0, 0, 0, 0] #각각 가로 세로 대각, 역대각. 총 합이 3이상이면 성공
+bingo_map = [list(map(int, input().split())) for _ in range(5)]
+li_call = [list(map(int, input().split())) for _ in range(5)]
+record_li = [[0] * 5 for _ in range(5)]
+count = 0
+switch = False
+for i in range(len(li_call)):
+    for j in range(len(li_call)):
+        count+=1
+        if check(li_call[i][j]):
+            print(count)
+            switch = True
+            break
+    if switch:
+        break
+            
