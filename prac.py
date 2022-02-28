@@ -1,79 +1,39 @@
-def check(val):
-    for i in range(len(bingo_map)):
-        for j in range(len(bingo_map)): # 22라면 4, 0
-            if val == bingo_map[i][j]:
-                record_li[i][j] = 1
-                row_check(i)
-                col_check(j)
-                if i == j:
-                    cross_check()
-                if j == 4-i:
-                    rev_cross_check()
-                if sum(bingo) == 3:
-                    return True
+T = int(input())
+
+for tc in range(T):
+    li = [0] * 1002
+    N = int(input())
+    for i in range(N):
+        bus_num, A, B = map(int, input().split())
+        
+        if bus_num == 1:
+            for j in range(A+1, B):
+                li[j] += 1
+        
+        if bus_num == 2:
+            for j in range(A, B+1, 2):
+                li[j] += 1
+            if B % 2 == 1 and A % 2 == 0:
+                li[B] += 1
+            if B % 2 == 0 and A % 2 == 1:
+                li[B] += 1
+              
+
+        if bus_num == 3:
+            li[A] += 1                
+            li[B] += 1
+            if A % 2 == 0:
+                for j in range(A+1, B):
+                    if j % 4 == 0:
+                        li[j] += 1
                     
-    else:
-        return False
+            elif A % 2 == 1:
+                for j in range(A+1, B):
+                    if j % 3 == 0 and j % 10 != 10:
+                        li[j] += 1        
+    
+    print(f'#{tc+1} {max(li)}')
 
-def row_check(x):
-    cnt = 0
-    for i in range(5):
-        if record_li[x][i] == 1:
-            cnt += 1
-    if cnt == 5:
-        bingo[0] = 1
-        return
-    else:
-        return
-
-def col_check(y):
-    cnt = 0
-    for i in range(5):
-        if record_li[i][y] == 1:
-            cnt += 1
-    if cnt == 5:
-        bingo[1] = 1
-        return
-    else:
-        return
-
-def cross_check():
-    cnt = 0
-    for i in range(5):
-        if record_li[i][i] == 1:
-            cnt += 1
-    if cnt == 5:
-        bingo[2] = 1
-        return
-    else:
-        return
-
-def rev_cross_check():
-    cnt = 0
-    for i in range(5):
-        if record_li[i][4-i] == 1:
-            cnt += 1
-    if cnt == 5:
-        bingo[3] = 1
-        return
-    else:
-        return
-
-
-
-bingo = [0, 0, 0, 0] #각각 가로 세로 대각, 역대각. 총 합이 3이상이면 성공
-bingo_map = [list(map(int, input().split())) for _ in range(5)]
-li_call = [list(map(int, input().split())) for _ in range(5)]
-record_li = [[0] * 5 for _ in range(5)]
-count = 0
-switch = False
-for i in range(len(li_call)):
-    for j in range(len(li_call)):
-        count+=1
-        if check(li_call[i][j]):
-            print(count)
-            switch = True
-            break
-    if switch:
-        break
-            
+#2 3 4 
+#3 5 7 9
+#4 8
