@@ -1,7 +1,8 @@
-#돌게임3
+#돌게임 3
+#시간초과
 N = int(input())
+memo = [-1] * 1010
 ans = ''
-dp = [False] * 1010
 def recur(cur, cnt):
     global ans
     
@@ -21,4 +22,24 @@ def recur(cur, cnt):
 
 recur(0, 0)
 print(ans)
-# cnt가 홀수이면 상근이 이김
+
+#상향식
+N = int(input())
+
+dp = [False for i in range(1010)]
+
+dp[1] = True
+dp[2] = False
+dp[3] = True
+dp[4] = True
+
+for i in range(5, N+1):
+    if (not dp[i-1]) or (not dp[i-3]) or (not dp[i-4]):
+        dp[i] = True
+    else:
+        dp[i] = False
+
+if dp[N]:
+    print('SK')
+else:
+    print('CY')
