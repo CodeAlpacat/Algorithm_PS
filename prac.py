@@ -1,11 +1,12 @@
+from cmath import tan
 from math import sqrt
 from math import atan2
 import math
 
 
-hole = [254, 0]
-target = [200, 31.25]
-white = [127, 63.5]
+hole = [260, 130]
+target = [250, 120]
+white = [65, 65]
 
 distance_target_hole = sqrt((abs(hole[0] - target[0]) ** 2 + abs(hole[1] - target[1]) ** 2))
 ball_size = 5.73
@@ -17,7 +18,7 @@ y_stick = target[1] * ratio_dis
 place = []
 if target[0] - white[0] > 0 and target[1] - white[1] > 0: # 1사분면
     place = [target[0] - x_stick, target[1]-y_stick]
-    degree = atan2(target[1]-y_stick-white[1], target[0] - x_stick - white[0]) * 180 / math.pi
+    degree = atan2(target[1]-y_stick, target[0] - x_stick) * 180 / math.pi
     angle = 90 - degree
 
 elif target[0] - white[0] < 0 and target[1] - white[1] > 0: # 2사분면
@@ -46,3 +47,31 @@ print(angle)
 #        angle = 아크탄젠트 + 180
 # else:
 #        angle = 탄젠트 + 270
+
+
+
+# def getAngle(white, target): # target은 1번공
+#     angle = 0
+    
+
+x_stick = 2.39374
+y_stick = 2.39374
+if target[0] - white[0] > 0 and target[1] - white[1] > 0: # 1사분면
+    degree = math.atan2(target[1]-y_stick-white[1], target[0] - x_stick - white[0]) * 180 / math.pi
+    angle = 90 - degree + 1
+
+elif target[0] - white[0] < 0 and target[1] - white[1] > 0: # 2사분면
+    degree = math.atan2(target[1]-y_stick - white[1], target[0] + x_stick - white[0]) * 180 / math.pi
+    angle = 450 - degree + 1
+
+elif target[0] - white[0] < 0 and target[1] - white[1] < 0: # 3사분면
+    degree = math.atan2(target[1] + y_stick - white[1], target[0] + x_stick - white[0]) * 180 / math.pi
+    angle = -(degree) + 90 + 2
+    
+elif target[0] - white[0] > 0 and target[1] - white[1] < 0: # 4사분면
+    degree = math.atan2(target[1] + y_stick - white[1], target[0] - x_stick - white[0]) * 180 / math.pi
+    angle = -degree + 90 + 2
+
+
+print(math.atan2(27, 54) * 180 / math.pi)
+print(math.sin((90-math.atan2(27, 54)))*5.74)
