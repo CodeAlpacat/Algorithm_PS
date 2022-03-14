@@ -1,3 +1,5 @@
+#N과 M(12)
+
 N, M = map(int, input().split())
 li = list(map(int, input().split()))
 li.sort()

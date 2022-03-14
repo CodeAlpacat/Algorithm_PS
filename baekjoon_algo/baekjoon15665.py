@@ -1,3 +1,4 @@
+#N과 M(11)
 N, M = map(int, input().split())
 li = list(map(int, input().split()))
 li.sort()
@@ -10,13 +11,13 @@ def recur(cur, cnt):
         return
         
     record = 0
-    for i in range(cnt, N):
+    for i in range(N):
         if visited[i] or record == li[i]:
             continue
         
         arr.append(li[i])
         record = li[i]
-        recur(cur + 1, i)
+        recur(cur + 1, i + 1)
         arr.pop()
         
 recur(0, 0)
