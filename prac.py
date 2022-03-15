@@ -1,29 +1,28 @@
-from collections import deque
 
+C = int(input())
 
-T = int(input())
-
-for tc in range(T):
-    N, M = map(int, input().split())
-    li = list(map(int, input().split()))
-
-    q = deque()
-    for i in range(N):
-        q.append([li[i], i])
+def recur(cur, cnt):
+    global ans
     
-    s = 0
-    while len(q) != 1:
-        q[0][0] //= 2
+
+    if cur == 11:
+        ans = max(ans, cnt)
+        return
+
+    for i in range(11):
+        if visited_idx[i]:
+            continue
         
-        if q[0][0] == 0:
-            if N + s < M:
-                q.popleft()
-                q.append([li[N+s], N+s])
-                s += 1
-            elif N+s >= M:
-                q.popleft()
-            
-        else:
-            q.append(q.popleft())
-    
-    print(f'#{tc+1} {q[0][1]+1}')
+        if li[cur][i]:
+            visited_idx[i] = True
+            recur(cur + 1, cnt + li[cur][i])
+            visited_idx[i] = False
+
+
+
+for _ in range(C):
+    li = [list(map(int, input().split())) for _ in range(11)]
+    visited_idx =[False] * 11
+    ans = 0
+    recur(0, 0)
+    print(ans)
