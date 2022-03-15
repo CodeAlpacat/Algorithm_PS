@@ -2,7 +2,6 @@
 N, M = map(int, input().split())
 li = list(map(int, input().split()))
 li.sort()
-visited = [False] * len(li)
 arr = []
 
 def recur(cur, cnt):
@@ -23,4 +22,10 @@ def recur(cur, cnt):
 
 recur(0, 0)
 
+def recur(cur, cnt):
+    
+    
 
+    arr.append(li)
+    recur(cur + 1, cnt + 1)
+    recur(cur + 1, cnt)
