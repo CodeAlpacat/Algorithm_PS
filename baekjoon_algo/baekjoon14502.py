@@ -1,3 +1,4 @@
+#연구소
 from collections import deque
 
 
@@ -34,7 +35,11 @@ def virus_spread():
         for j in range(M):
             arr[i][j] = li[i][j]
 
-   
+    li_virus = []
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 2:
+                li_virus.append([i, j])
 
     while li_virus:
         x, y = li_virus[0][0], li_virus[0][1]
@@ -52,11 +57,7 @@ def virus_spread():
             if arr[i][j] == 0:
                 result += 1
     max_ans = max(max_ans, result)
-li_virus = []
-for i in range(N):
-    for j in range(M):
-        if li[i][j] == 2:
-            li_virus.append([i, j])
+
 max_ans = 0
 recur(0)
 print(max_ans)
