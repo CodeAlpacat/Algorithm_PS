@@ -1,24 +1,37 @@
-T = int(input())
+from collections import deque
 
-def enque(n): #최소힙
-    tree.append(n)
-    p = len(tree) - 1
-    while p > 1 and tree[p//2] > tree[p]:
-        tree[p], tree[p//2] = tree[p//2], tree[p]
-        p = p // 2
 
-for tc in range(1, T+1):
-    N = int(input())
-    heap = list(map(int, input().split()))
-    tree = [0]
-    for i in heap:
-        enque(i)
+def dfs(v):
+    visited[v] = True
+    print(v, end = ' ')
+    for i in graph[v]:
+        if visited[i]:
+            continue
+        dfs(i)
 
-    total = 0
-    idx = N // 2
-    while idx:
-        total += tree[idx]
-        idx //= 2
-    
-    print(f'#{tc} {total}')
+def bfs(v):
+    q = deque([v])
+    visited_bfs[v] = True
+    while q:
+        n = q.popleft()
+        print(n, end= ' ')
+        for i in graph[n]:
+            if visited_bfs[i]:
+                continue
+            q.append(i)
+            visited_bfs[i] = True
 
+N, M, V = map(int, input().split())
+graph = [[] for _ in range(N+1)]
+visited = [False] * (N+1)
+visited_bfs = [False] * (N+1)
+for i in range(M):
+    node, target = map(int, input().split())
+    graph[node].append(target)
+    graph[target].append(node)
+for i in range(N+1):
+    graph[i].sort()
+
+dfs(V)
+print()
+bfs(V)
