@@ -24,8 +24,13 @@ n = int(input())
 arr = list(map(int, input().split()))
 arr2 = [0 for i in range(n)]
 visited = [False for i in range(n)]
+def check():
+    #내가 백트래킹이 끝나기 직전에 연산하고 싶은것!
+    return
 def recur(cur):
     if cur == n:
+        #종료 전에 계산을 원하는 함수 check
+        check()
         return
     
     for i in range(n):
