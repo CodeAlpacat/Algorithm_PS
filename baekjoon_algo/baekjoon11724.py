@@ -12,6 +12,7 @@ graph = [[] for _ in range(N+1)]
 for i in range(M):
     u, v = map(int, input().split())
     graph[u].append(v)
+    graph[v].append(u)
 
 ans = 0
 for i in range(1, N+1):

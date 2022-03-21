@@ -1,59 +1,22 @@
-from collections import deque
-dx = [1, 0, -1, 0]
-dy = [0, 1, 0, -1]
+import sys
+input = sys.stdin.readline
 
-def in_range(x, y):
-    return 0 <= x < M and 0 <= y < N
+def dp(n, w):
+    global memo,item_list
+    if  w<0:
+        return -100000000
+    if memo[n][w] != -1:
+        return memo[n][w]
 
-# def bfs():
-#     q = deque()
-#     q.append([0, 0])
-#     visited[0][0] = True
-#     d = 0
-#     while q:
-#         size = len(q)
-#         for _ in range(size):
-#             x, y = q.popleft()
-            
-#             if x == M-1 and y == N-1:
-#                 d += 1
-
-#             for i in range(4):
-#                 nx = x + dx[i]
-#                 ny = y + dy[i]
-#                 if not in_range(nx, ny):
-#                     continue
-                
-#                 if graph[x][y] <= graph[nx][ny]:
-#                     continue
-                
-
-#                 q.append([nx, ny])
-
-#     return d
-
-def dfs(x, y):
-    if visited[x][y] != None:
-        return visited[x][y]
-
-    d = 0
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-
-        if not in_range(nx, ny):
-            continue
-        
-        if graph[x][y] <= graph[nx][ny]:
-            continue
-
-        d += dfs(nx, ny)
+    memo[n][w] = max(dp(n-1, w-item_list[n][0]) + item_list[n][1], dp(n-1, w))
+    return memo[n][w]
     
-    visited[x][y] = d
-    return visited[x][y]
+N, K = map(int, input().split())
+memo = [[0]+[-1 for _ in range(K)] for _ in range(N+1)]
+memo[0] = [0 for _ in range(K+1)]
+item_list = [[]]
+for _ in range(N):
+    item_list.append(list(map(int, input().split())))
+print(dp(N, K))
 
-M, N = map(int, input().split())
-graph = [list(map(int, input().split())) for _ in range(M)]
-visited = [[None] * N for _ in range(M)]
-visited[M-1][N-1] = 1
-print(dfs(0, 0))
+print(memo)
