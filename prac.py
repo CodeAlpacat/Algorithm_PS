@@ -1,88 +1,46 @@
-import sys
-sys.stdin=open('sample_input (6).txt')
-T = int(input())
-secret_origin = {
-    '0001101': 0,
-    '0011001': 1,
-    '0010011': 2,
-    '0111101': 3,
-    '0100011': 4,
-    '0110001': 5,
-    '0101111': 6,
-    '0111011': 7,
-    '0110111': 8,
-    '0001011': 9
-}
-bi_convert = {
-        '0':'0000',
-        '1':'0001',
-        '2':'0010',
-        '3':'0011',
-        '4':'0100',
-        '5':'0101',
-        '6':'0110',
-        '7':'0111',
-        '8':'1000',
-        '9':'1001',
-        'A':'1010',
-        'B':'1011',
-        'C':'1100',
-        'D':'1101',
-        'E':'1110',
-        'F':'1111'
-    }
-ratio_bi = {
-    (2, 1, 1): 0,
-    (2, 2, 1): 1,
-    (1, 2, 2): 2,
-    (4, 1, 1): 3,
-    (1, 3, 2): 4,
-    (2, 3, 1): 5,
-    (1, 1, 4): 6,
-    (3, 1, 2): 7,
-    (2, 1, 3): 8,
-    (1, 1, 2): 9
-}
+# import sys
+# sys.stdin=open('sample_input.txt')
+
+#중심에서의 거리가 k = 1은 거리 0. k =1, 거리 1, k=3, 거리2, k=4, 거리3
+#1 5 13 25 50
+# 4 8  12 25
+
+def cost(x): #x는 k의 크기
+    cnt = 0
+    t = 0
+    while t < x:
+        cnt += ((2 * t + 1) * 2)
+    cnt += (2*x-1)
+
+    return cnt
+
+def check_profit(arr):
+    max_pro = -100000000
+    
+    for i in range(1, len(arr)):
+        max_pro = max(max_pro, arr[i] * M - cost(i))
+    
+    return max_pro
 
 
-def check_secret():
-    ans = 0
-    for h in range(len(secret_table)):
-        bi_change = ''
-        for j in range(len(secret_table[h])):
-            bi_change += bi_convert[secret_table[h][j]]
-        bi_change = bi_change.rstrip("0")
-        t = bi_change
-
-        arr_ratio = []
-        cnt1 = cnt2 = cnt3 = cnt4 = 0
-        for i in range(len(t)-1, -1, -1):
+def check_result():
+    max_profit = -100000000
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                for p in range(N):
+                    t = 1
+                    list_k = [0] * (2//N+1) #거리가 t인 집의 수
+                    while t < (2//N+1):
+                        if mat[k][p] == 1 and abs(i-k) + abs(j-p) == t:
+                            list_k[t] += 1
+                        t += 1
+                    max_profit = max(max_profit, check_profit(list_k))
+    return max_profit
             
-            if t[i] == '1' and cnt2 == 0:
-                cnt1 += 1
-            elif t[i] == '0' and cnt3 == 0:
-                cnt2 += 1
-            elif t[i] == '1' and cnt4 == 0:
-                cnt3 += 1
-            elif t[i] == '0':
-                if t[i-1] == '1':
-                    cnt = min(cnt1, cnt2, cnt3)
-                    arr_ratio.append(ratio_bi[cnt3//cnt, cnt2//cnt, cnt1//cnt])
-                    cnt1 = cnt2 = cnt3 = 0
-                    if len(arr_ratio) == 8:
-                        a = arr_ratio[1] + arr_ratio[3] + arr_ratio[5] + arr_ratio[7]
-                        b = arr_ratio[0] + arr_ratio[2] + arr_ratio[4] + arr_ratio[6]
-                        if (a * 3 + b) % 10 == 0:
-                            if arr_ratio not in visited:
-                                visited.append(arr_ratio)
-                                ans += (a+b)
-                        arr_ratio = []
-    return ans
+T = int(input())
 
 for tc in range(T):
     N, M = map(int, input().split())
-    secret_table = sorted(list(set([input()[:M] for _ in range(N)])))
-    secret_table.pop(0)
-    visited = []
-    ans = check_secret()
-    print(f'#{tc+1} {ans}')
+    mat = [list(map(int, input().split())) for _ in range(N)]
+    print(check_result())
