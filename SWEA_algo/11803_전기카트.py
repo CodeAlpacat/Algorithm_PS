@@ -31,4 +31,4 @@ for tc in range(1, T+1):
     ans = 1000000000
 
     recur(1, 0, 0)
-    print(ans)
+    print(f'#{tc} {ans}')

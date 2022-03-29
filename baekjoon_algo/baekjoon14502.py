@@ -23,9 +23,6 @@ def recur(cur):
                 recur(cur + 1)
                 li[i][j] = 0
             
-
-
-    
 def virus_spread():
     global max_ans
     dx = [1, 0, -1, 0]

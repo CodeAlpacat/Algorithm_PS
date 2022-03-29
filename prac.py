@@ -1,33 +1,31 @@
 # import sys
 # sys.stdin=open('sample_input.txt')
+import sys
+sys.setrecursionlimit(10**9)
+input = sys.stdin.readline
 
-def recur(cur):
-    global ans
-
-    if cur == N:
-        for i in range(len(arr)):
-            for j in range(i+1, len(arr)):
-                if arr[i] == arr[j]:
-                    return
-        else:
-            ans += 1
-        return
-
-    for i in range(N):
-        
-        if cur == i:
-            continue
-
-        arr[cur] = i # [cur, i] = [x, y]
-        recur(cur + 1)
-
-T = int(input())
-
-for tc in range(1, T+1):
-    N = int(input())
-    arr = [0] * N
-    visited = [False] * N
-    ans = 0
+N, R, Q = map(int, input().split())
+v = [[] for _ in range(N+1)]
+for i in range(N-1):
+    a, b = map(int, input().split())
     
-    recur(0)
-    print(ans)
+    v[a].append(b)
+    v[b].append(a)
+sz = [0] * (N+1)
+def dfs(cur, prv):
+    sz[cur] = 1
+    for nxt in v[cur]:
+        if nxt == prv:
+            continue
+        
+        sz[cur] += dfs(nxt, cur)
+    return sz[cur]
+
+dfs(R, -1)
+arr = []
+for i in range(Q):
+    U = int(input())
+    arr.append(sz[U])
+
+for i in arr:
+    print(i)
