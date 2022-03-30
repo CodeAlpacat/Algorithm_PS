@@ -21,3 +21,32 @@ for tc in range(1, T+1):
     cnt = 0
     preorder(N)
     print(f'#{tc} {cnt}')
+
+
+
+
+def tree(cur, prv):
+    sz[cur] = 1
+
+    for nxt in graph[cur]:
+        if nxt == prv:
+            continue
+        sz[cur] += tree(nxt, cur)
+
+    return sz[cur]
+
+T = int(input())
+
+for tc in range(1, T+1):
+    E, N = map(int, input().split())
+    graph = [[] for _ in range(E+2)]
+    sz = [0] * (E+2)
+    li = list(map(int, input().split()))
+
+    for i in range(0, len(li), 2):
+        graph[li[i]].append(li[i+1])
+
+    tree(N, -1)
+
+
+    print(f'#{tc} {sz[N]}')
