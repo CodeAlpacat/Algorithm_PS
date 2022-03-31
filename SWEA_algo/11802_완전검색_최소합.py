@@ -8,7 +8,7 @@ def recur(x, y):
     if memo[x][y] != -1:
         return memo[x][y]
 
-    memo[x][y] = min(recur(x + 1, y)+ mat[x][y], recur(x, y + 1) + mat[x][y])
+    memo[x][y] = min(recur(x + 1, y) + mat[x][y], recur(x, y + 1) + mat[x][y])
     return memo[x][y]
 
 T = int(input())
