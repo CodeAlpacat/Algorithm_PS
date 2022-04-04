@@ -1,60 +1,65 @@
 #연구소
 from collections import deque
+import sys
+# sys.stdin=open('sample_input.txt')
 
+dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
 
 N, M = map(int, input().split())
-li = [list(map(int, input().split())) for _ in range(N)]
-ans = 0 
-def recur(cur):
+mat = [list(map(int, input().split())) for _ in range(N)]
 
-    if cur > 3:
-        return
-
-    if cur == 3:
-        virus_spread()
-        return
-
-    if cur == N:
-        return    
-    for i in range(N):
-        for j in range(M):
-            if li[i][j] == 0:
-                li[i][j] = 1
-                recur(cur + 1)
-                li[i][j] = 0
-            
-def virus_spread():
-    global max_ans
-    dx = [1, 0, -1, 0]
-    dy = [0, -1, 0, 1]
-    arr = [[0]* M for _ in range(N)]
-    for i in range(N):
-        for j in range(M):
-            arr[i][j] = li[i][j]
-
-    li_virus = []
-    for i in range(N):
-        for j in range(M):
-            if arr[i][j] == 2:
-                li_virus.append([i, j])
-
-    while li_virus:
-        x, y = li_virus[0][0], li_virus[0][1]
-        li_virus.pop(0)
+def bfs(): #복사된 배열을 받아서 바이러스 퍼트리기
+    lst = [i[:] for i in mat]
+    li = [i[:] for i in li_1]
+    li = deque(li)
+    while li:
+        x, y = li.popleft()
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0 <= nx < N and 0 <= ny < M:
-                if arr[nx][ny] == 0:
-                    arr[nx][ny] = 2
-                    li_virus.append([nx, ny])
-    result = 0
+            if 0 <= nx < N and 0 <= ny < M and lst[nx][ny] == 0:
+                lst[nx][ny] = 2
+                li.append([nx, ny])
+    return lst
+
+def check_max(lst): # 복사된 리스트에 있는 0의 개수 세기
+    cnt = 0
     for i in range(N):
         for j in range(M):
-            if arr[i][j] == 0:
-                result += 1
-    max_ans = max(max_ans, result)
+            if lst[i][j] == 0:
+                cnt += 1
+    return cnt
 
-max_ans = 0
-recur(0)
-print(max_ans)
+def recur(x, y, cnt): #2차원 조합
+    global ans
+    if cnt > 3:
+        return
+
+    if cnt == 3:
+        a = bfs()
+        ans = max(ans, check_max(a))
+        return
+    
+    if y == M:
+        y = 0
+        x += 1
+    
+    if x == N:
+        return
+
+    if mat[x][y] == 0:
+        mat[x][y] = 1
+        recur(x, y+1, cnt + 1)
+        mat[x][y] = 0
+    recur(x, y + 1, cnt)
+
+li_1 = deque()
+for i in range(N):
+    for j in range(M):
+        if mat[i][j] == 2:
+            li_1.append([i, j])
+
+ans = -1000000000
+recur(0, 0, 0)
+print(ans)
