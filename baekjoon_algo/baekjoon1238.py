@@ -1,6 +1,3 @@
-# import sys
-# sys.stdin=open('sample_input.txt')
-
 import heapq
 
 #정방향이면 해당 노드에서 다른 점들까지 최단거리를 구할 수 있다.
