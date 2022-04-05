@@ -32,5 +32,5 @@ for tc in range(1, T+1):
                 dist[nxt] = nd
                 heapq.heappush(pq, (nd, nxt))
     
-    print(dist[n])
+    print(f'#{tc} {dist[n]}')
 
