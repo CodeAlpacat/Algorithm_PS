@@ -21,7 +21,7 @@ while len(pq) > 0:
     # mn = 1000000000
     # cur = 0
     # for i in range(1, N+1):
-    #     if not visited[i] and dist[i] < mn:
+    #     if not visited[i] and dist[i] < mn:   
     #         mn = dist[i]
     #         cur = i
     d, cur = heapq.heappop(pq) #가장 작은 값 뽑힘. d = 현재 인덱스까지의 가중치합. cur = 인덱스 // O(logn)임 heappush, pop 둘다.

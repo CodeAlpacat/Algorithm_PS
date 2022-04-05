@@ -1,52 +1,44 @@
 # import sys
 # sys.stdin=open('sample_input.txt')
 
+from collections import deque
 import heapq
 
-#정방향이면 해당 노드에서 다른 점들까지 최단거리를 구할 수 있다.
-#역방향이면 다른 노드에서 현재 노드까지의 최단거리를 모두 구할 수 있다.
-n, m, x = map(int, input().split())
-v = [[] for _ in range(n+1)] #정방향 그래프
-rv = [[] for _ in range(n+1)] #역방향 그래프
 
-for i in range(m):
-    a, b, c = map(int, input().split())
-    
-    v[a].append([b, c]) #정방향
-    rv[b].append([a, c]) #역방향
+T = int(input())
 
-def get_dist(s, v): #s = 시작노드, v = v와 rv중 뭘쓸지
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1 ,0]
+
+def get_dist():
     pq = []
-    
-    dist[s] = 0
-    heapq.heappush(pq, (0, s))
+
+    dist[0][0] = 0
+    heapq.heappush(pq, (0, 0, 0))
     while len(pq):
-        d, cur = heapq.heappop(pq)
-
-        if dist[cur] != d:
+        d, cur_x, cur_y = heapq.heappop(pq)
+        
+        if dist[cur_x][cur_y] != d:
             continue
+        
+        for i in range(4):
+            nx = cur_x + dx[i]
+            ny = cur_y + dy[i]
 
-        for i in range(len(v[cur])):
-            nxt = v[cur][i][0]
-            nd = d + v[cur][i][1]
+            if 0 <= nx < N and 0 <= ny < N:
+                num_cost = abs(mat[nx][ny] - mat[cur_x][cur_y]) + 1
+                nxt = d + num_cost
 
-            if dist[nxt] > nd:
-                dist[nxt] = nd
-                heapq.heappush(pq, (nd, nxt))
+                if dist[nx][ny] > nxt:
+                    dist[nx][ny] = nxt
+                    heapq.heappush(pq, (nxt, nx, ny))
 
 
-dist = [1000000000 for _ in range(n+1)]
-get_dist(x, v) #정방향 다익스트라
-ans = dist[:]
 
-dist = [1000000000 for _ in range(n+1)]
-get_dist(x, rv) #역방향 다익스트라
 
-for i in range(1, n+1):
-    ans[i] += dist[i] #가는 길에서 오늘 길에 걸린 시간을 더함. ans = 정방향 복사 / dist = 다시선언해 역방향으로 구한 것.
-
-mx = -1
-for i in range(1, n+1):
-    mx = max(mx, ans[i])
-
-print(mx)
+for tc in range(1, T+1):
+    N = int(input())
+    mat = [list(map(int, input().split())) for _ in range(N)]
+    dist = [[1000000000] * N for _ in range(N)]
+    get_dist()
+    print(f'#{tc} {dist[N-1][N-1]}')
