@@ -26,7 +26,7 @@ def bfs(x, y):
                 if not in_range(nx, ny):
                     continue
                 
-                ncrash = crash + int(graph[nx][ny]) # 벽이면 1씩 추가
+                ncrash = crash + graph[nx][ny] # 벽이면 1씩 추가
                 
                 if ncrash > 1 or visited[nx][ny][ncrash]: # 방문했거나 벽을 두 번 부쉈으면 continue
                     continue
@@ -37,7 +37,7 @@ def bfs(x, y):
     return -1
 
 N, M = map(int, input().split())
-graph = [input() for i in range(N)]
+graph = [list(map(int, list(input()))) for _ in range(N)]
 visited = [[[False] * 3 for _ in range(M)] for _ in range(N)] #3차원 배열과 벽을 0, 1, 2회 부쉈는지
 
 print(bfs(0, 0))
