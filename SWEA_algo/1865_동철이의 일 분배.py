@@ -1,6 +1,6 @@
 T = int(input())
 
-def recur(cur, cnt, used):
+def recur(cur, used):
     ret = -1000000000
     if cur > N:
         return 0
