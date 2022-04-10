@@ -41,3 +41,11 @@ graph = [list(map(int, list(input()))) for _ in range(N)]
 visited = [[[False] * 3 for _ in range(M)] for _ in range(N)] #3차원 배열과 벽을 0, 1, 2회 부쉈는지
 
 print(bfs(0, 0))
+
+# 6 4
+# 0100
+# 1110
+# 1000
+# 0100
+# 0111
+# 0000
