@@ -4,8 +4,8 @@ sys.setrecursionlimit(10000)
 
 def recur(cur, prv):
     ret = 0xffffff
-    if cur > N:
-        return ret
+    if cur > N or prv > 3:
+        return 0xffffff
 
     if cur == N:
         return 0
@@ -24,10 +24,10 @@ N = int(input())
 mat = [list(map(int, input().split())) for _ in range(N)]
 memo = [[-1] * (N+10) for _ in range(N+10)]
 
-print(recur(0, -10))
+print(recur(0, 18))
 
 
-
+##############################################################################
 
 N = int(input())
 mat = [[0] * 3] + [list(map(int, input().split())) for _ in range(N)]
@@ -44,3 +44,5 @@ for i in range(1, N+1):
 print(min(dp[N]))
 
 # min(recur(i - 1, j), recur(i - 1, j-1), recur(i - 1, j-2))
+
+
