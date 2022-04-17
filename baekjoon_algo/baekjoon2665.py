@@ -1,7 +1,3 @@
-from collections import deque
-import sys
-# sys.stdin=open('sample_input.txt')
-# import collections
 import heapq
 
 dx = [0, 1, 0, -1]
