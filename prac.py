@@ -4,4 +4,38 @@ import sys
 # import collections
 import heapq
 
+def bfs(start):
+    q = deque()
+    q.append(start)
+    visited[start] = 1
+    
+    while q:
+        n = q.popleft()
+        
+        for i in mat[n]:
+            if visited[i]:
+                continue
+            
+            q.append(i)
+            visited[i] = visited[n] + 1
 
+N, M, K, X = map(int, input().split())
+mat = [[] for _ in range(N+1)]
+visited = [0] * (N+1)
+
+for i in range(M):
+    s, e = map(int, input().split())
+    mat[s].append(e)
+
+bfs(X)
+res = []
+for i in range(len(visited)):
+    if visited[i]-1 == K:
+        res.append(i)
+
+if len(res) == 0:
+    print(-1)
+else:
+    res.sort()
+    for i in res:
+        print(i)
