@@ -8,10 +8,14 @@ def find(x):
 
 def union(a, b):
     a = find(a)
-    b = find(b)
+    b = find(b) 
     
+    if a == b:
+        return
+
     if rnk[a] < rnk[b]:
         par[a] = b
+        
     elif rnk[a] > rnk[b]:
         par[b] = a
     else:
@@ -34,3 +38,5 @@ for i in range(m):
 
     union(x, y)
     ans += v[i][2]
+
+print(ans)

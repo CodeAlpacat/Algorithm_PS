@@ -1,11 +1,6 @@
-from collections import deque
-import sys
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-
 N = int(input())
 M = int(input())
+
 par = [i for i in range(N+1)]
 rnk = [0] * (N+1)
 mat = [list(map(int, input().split())) for _ in range(M)]
