@@ -1,9 +1,5 @@
-from collections import deque
 import sys
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-
+input = sys.stdin.readline
 def recur(cur, total):
     global ans
     if cur == N:
@@ -14,21 +10,22 @@ def recur(cur, total):
         if visited[i]:
             continue
 
-        copy_price = [0] * N
-        for k in range(N):
-            copy_price[k] = coin_price[k]
 
         for j in range(N):
             coin_price[j] -= list_discount[i][j]
-            if coin_price[j] < 1:
-                coin_price[j] = 1
+        
+        origin = coin_price[i]
+        if coin_price[i] < 1:
+            coin_price[i] = 1
         
         visited[i] = True
         recur(cur+1, total + coin_price[i])
         visited[i] = False
+        
+        coin_price[i] = origin
 
-        for k in range(N):
-            coin_price[k] = copy_price[k]
+        for j in range(N):
+            coin_price[j] += list_discount[i][j]
 
 
 
