@@ -1,12 +1,15 @@
-N = int(input())
-M = int(input())
+import sys
+# sys.stdin=open('sample_input.txt')
+# import collections
+import heapq
+
+input = sys.stdin.readline
+N, M = map(int, input().split())
 
 par = [i for i in range(N+1)]
 rnk = [0] * (N+1)
 mat = [list(map(int, input().split())) for _ in range(M)]
-
 mat.sort(key=lambda x: x[2])
-
 
 def find(x):
     if par[x] == x:
@@ -18,10 +21,10 @@ def find(x):
 def union(a, b):
     a = find(a)
     b = find(b)
-
+    
     if a == b:
-        return
-
+        return 
+    
     if rnk[a] < rnk[b]:
         par[a] = b
     elif rnk[a] > rnk[b]:
@@ -37,8 +40,8 @@ for i in range(M):
     if find(a) == find(b):
         continue
     
-    else:
-        union(a, b)
-        ans += mat[i][2]
+    union(a, b)
+    ans += mat[i][2]
+    last_house_idx = i
 
-print(ans)
+print(ans - mat[last_house_idx][2])
