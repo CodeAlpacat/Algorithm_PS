@@ -29,6 +29,7 @@ rnk = [0 for i in range(n+1)] #트리의 레벨
 
 v.sort(key=lambda x:x[2])
 
+
 ans = 0
 for i in range(m):
     x, y = v[i][0], v[i][1]
@@ -38,5 +39,5 @@ for i in range(m):
 
     union(x, y)
     ans += v[i][2]
-
+print(*par)
 print(ans)
