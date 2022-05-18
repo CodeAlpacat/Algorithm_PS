@@ -9,6 +9,9 @@ import heapq
 T = int(input()) #T는 케이스 개수 3
 
 
+
+
+
 for tc in range(1, T+1): #테스트 케이스 for 문 3번
     input_list = list(map(int, input().split())) #인풋 받아서 리스트로 만들어줌
     
