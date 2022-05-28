@@ -4,91 +4,41 @@ import sys
 # import collections
 import heapq
 
-# N = int(input())
+dx = [0, 1, 0, -1] # 우 하 좌 상
+dy = [1, 0, -1, 0]
 
-# arr1 = [i for i in range(N)] # 같음
-# #---------------------
-# arr2 = []
-# for i in range(N): #같음
-#     arr2.append(i)
+def snail():
+    x = 0
+    y = 0
+    direction = 0
+    for i in range(N*N):
+        snail_arr[x][y] = i + 1 # 1부터 시작해야함
+        #좌표를 이동하기
+        x += dx[direction]
+        y += dy[direction]
+        #이동한 곳이 숫자를 넣을 수 있는 곳일까?
+        # if 0 > x or x >= N or 0 > y or y >= N or snail_arr[x][y]:
+        if 0 <= x < N and 0 <= y < N and not snail_arr[x][y]: #
+            continue
+        else:
+            x -= dx[direction]
+            y -= dy[direction]
 
-# x = 1
-# arr3 = [0 for i in range(N) if x == 0]
-# #---------------------
-# arr4 = []
-# for i in range(N):
-#     if x == 0:
-#         arr4.append(0)
-# # 1 2 3 4 5 
-# # 1 2 3 4 5
-# # 1 2 3 4 5
-# # 1 2 3 4 5
-# # 1 2 3 4 5
- 
-
-# arr = [1, 2, 3, 4, 5, 6]
-
-# arr2 = [arr[0:3] for _ in range(3)]
-
-# res = []
-# for i in range(3):
-#     for j in range(3):
-#         res.append(arr[i])
-
-# arr = [list(map(int, input().split())) for _ in range(N)]
-# arr = [[list(map(int, input().split())) for _ in range(N)] for _ in range(N)]
-# #1 2 3
-# #4 5 6
-# #7 8 9
-# (x, y)
-# (x+1, y)
-# (x, y+1)
-# (x+1, y+1)
-
-# dx = [1, 0, 1]
-# dy = [0, 1, 1]
+            direction = (direction + 1) % 4 # 우 하 좌 상 1 2 3 0 1 2 3 3
+                                            # 0  1  2  3  방향은 4번인덱스가 없음
+            x += dx[direction]
+            y += dy[direction]
 
 
 
-# for i in range(3):
-#     for j in range(3):
-#         result = arr[x][y]
-#         for i in range(3):
-#             nx = x + dx[i]
-#             ny = y + dy[i]
+T = int(input())
 
-#             if 0 <= nx < 3 and 0 <= ny < 3:
-#                 result += arr[nx][ny]
-
-
-
-# (0, 0) (0, 1) (0, 2)
-# (1, 0) (1, 1) (1, 2)
-# (2, 0) (2, 1) (2, 2)
-
-# (0, 0) (0, 2)
-# (0, 1) (1, 2)
-# (0, 2) (2, 2)
-
-# (1, 0) (0, 1)
-# (1, 1) (1, 1)
-
-# N = 3
-# li = [list(map(int, input().split())) for _ in range(N)]
-
-# arr = [[0] * N for _ in range(N)]
-# 0, (0 1 2)
-# 0 0 / 0 1 / 0 2/
-# #결과 = i 자리에 있는 애들이 감소해야함
-# #그럼? j에 있는 증가하는 값들을 끝에서부터 빼줌. => 끝? => N-1
-# 2 0 / 1 0 / 0 0/
-
-# N - 1 - j
-# # (0, 0) (0, 1) (0, 2)
-# for i in range(N): # 0
-#     for j in range(N): # 0 1 2
-#         arr[i][j] = li[N-1-j][i]
-
-# print()
-# for i in arr:
-#     print(*i) 
+for tc in range(T):
+    N = int(input())
+    snail_arr = [[0] * N for _ in range(N)]
+    direction = 0
+    snail()
+    
+    print(f'#{tc+1}')
+    for i in snail_arr:
+        print(*i)
