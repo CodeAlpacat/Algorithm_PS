@@ -5,48 +5,78 @@ import sys
 import heapq
 
 
-def catch_robot(cur, A_total, B_total):
+def compose_members(cur, total, cnt):
     global ans
 
-    if cur > N:
+    if total_stats - total * 2 < 0 or cnt > N//2: # 만약 선수 능력치나 선수 수의 밸런스가 깨진다면, False
         return
 
-    if cur == N:
-        ans = min(cur, ans)
-        #여기서 B_total과 A_total을 비교
-        return
-    
-    if A_total >= B_total:
-        ans = min(cur, ans) #A가 B를 따라잡았을 때, 날짜의 최솟값(빨리 따라잡을 수록 좋다)
+    if total_stats == (total * 2) and cnt == N//2: #현재 고른 선수들의 능력치의 합 * 2 == 총 능력치이고  and  현재 고른 선수들의 수 == 전체 선수 수의 절반
+        ans = True
         return
 
-    catch_robot(cur + A_list[cur][0], A_total + A_list[cur][1], sum(B_list[0:cur+1]) + start_dist) # 선택하면 뛰어서 ?KM가고 ?시간 만큼 쉬어준다.
-    catch_robot(cur + 1, A_total + 1, sum(B_list[0:cur+1])+start_dist) #굳이 선택안하고 걷더라도 1km씩은 쉬지 않고 걷는다.
+    if cur > N: #리스트 범위를 벗어나는 경우 False
+        return
 
-T = int(input()) #테스트 케이스 개수
+    if cur == N: #선수 분배를 완료하지 못하고 리스트의 끝에 도달하는 경우 False
+        return
 
+
+    compose_members(cur + 1, total + players[cur], cnt + 1) # 선수를 골라서 팀에 능력치를 더해줌
+    compose_members(cur + 1, total, cnt) #선수를 고르지 않음
+
+
+#사람 수(N) => 10~ 16명 제한
+T = int(input())
+list_res = []
 for tc in range(T):
-    N = int(input()) #달릴 수 있는 총 시간
-    A_list = [] # [[달리고 쉬어줄 시간, 달릴 수 있는 거리], ....]
-    for i in range(N):
-        single_case = list(map(int, input().split())) # A의 각 케이스
-        A_list.append(single_case)
-    
-    B_list = list(map(int, input().split())) #쉬지 않고 꾸준히 달리는 로봇
-    start_dist = int(input()) #시작부터 벌어져있는 거리
+    N = int(input())
+    players = list(map(int, input().split()))
+    total_stats = sum(players) #선수들의 총 능력치
+    ans = False #디폴트로 False로 아직 선수들의 분배가 이루어지지 않았음.
+    compose_members(0, 0, 0)
 
-    ans = 0xffffff
-    catch_robot(0, 0, start_dist)
-    print(ans)
+    list_res.append(ans)
 
-# 1
-# 3
-# 0 3 #쉬어줘야하는 일수(1일 경우는 1일만 증가하므로 안쉬어주는거나 다름없음)
-# 1 5
-# 2 7
-# 1 2 3
-# 5
+for i in range(len(list_res)):
+    print(f'#{i+1} {list_res[i]}')
 
-#  0  1      2        3       4
-#  0  3km    8km      8       8
-#  5  6km    8km     11km
+
+
+
+#########################################
+
+# def compose_members(cur, total, cnt):
+
+#     if total_stats - total < 0 or cnt > N//2:
+#         return False
+
+#     if total_stats == (total * 2) and cnt == N//2: #현재 고른 선수들의 능력치의 합 * 2가 총 능력치와 같고 선수의 수도 절반을 차지해야함
+#         return True
+
+#     if cur > N:
+#         return False
+
+#     if cur == N: #선수들 리스트를 벗어나면 리턴
+#         return False
+
+#     if memo[cur][total][cnt] != -1:
+#         return memo[cur][total][cnt]
+
+#     memo[cur][total][cnt] = (compose_members(cur + 1, total + players[cur], cnt + 1)) or compose_members(cur + 1, total, cnt)
+#     return memo[cur][total][cnt]
+
+
+# #사람 수(N) => 10~ 16명 제한
+# #
+# T = int(input())
+
+# for tc in range(T):
+#     N = int(input())
+#     players = list(map(int, input().split()))
+#     total_stats = sum(players)
+#     memo = [[[-1] * N for _ in range(total_stats)] for _ in range(N)]
+
+#     print(compose_members(0, 0, 0))
+
+
