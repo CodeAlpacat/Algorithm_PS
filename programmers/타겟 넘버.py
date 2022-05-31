@@ -1,9 +1,3 @@
-from collections import deque
-import sys
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-
 def solution(numbers, target):
     global ans
     #조합 => 1을 고르는 경우 -1을 고르는 경우 합이 target이 되는 경우 ans += 1
