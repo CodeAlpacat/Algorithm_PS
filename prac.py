@@ -30,11 +30,6 @@ def solution(m, n, board):
             if cnt == 3:
                 visited[i][j], visited[i+1][j], visited[i][j+1], visited[i+1][j+1] = 1
             
-            
-    
-
-    
-            
     return board
 
 print(solution(M, N, board_A))
