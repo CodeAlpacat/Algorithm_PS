@@ -14,3 +14,33 @@ for i in num_list:
         pass
 
 print(result)
+
+
+################
+
+
+def isPrime(a):
+    
+    cnt = 0
+    if a == 1:
+        return 0
+
+    for i in range(2, a+1):
+        if i * i > a:
+            break
+
+        if a % i == 0:
+           cnt += 1
+    
+    if cnt == 0:
+        return 1
+    else:
+        return 0
+
+N = int(input())
+mat = list(map(int, input().split()))
+ans = 0
+for i in mat:
+    ans += isPrime(i)
+
+print(ans)
