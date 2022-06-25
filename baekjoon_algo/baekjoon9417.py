@@ -17,3 +17,31 @@ for _ in range(N):
 
 for i in list_result:
     print(i)
+
+
+######################
+
+
+def gcd(a, b):
+    if a < b:
+        a, b = b, a
+
+    while a % b != 0: #배수가 되면 끝
+        a, b = b, a % b
+    
+    return b
+
+N = int(input())
+
+for tc in range(N):
+    mat = list(map(int, input().split()))
+    ans = -0xffffff
+    for i in range(len(mat)):
+        for j in range(i, len(mat)):
+            if i == j:
+                continue
+
+            #최대 공약수(유클리드 호제법)
+            ans = max(ans, gcd(mat[i], mat[j]))
+
+    print(ans)
