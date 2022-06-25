@@ -1,11 +1,3 @@
-from collections import deque
-import math
-import sys
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-
-
 #에라토스테네스의 체
 #K가 주어지면  K에 가장 근접한 두 소수를 찾는다.
 T = int(input())
