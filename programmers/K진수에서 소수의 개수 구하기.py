@@ -16,7 +16,6 @@ def solution(n, k):
         q = deque([])
         while n:
             n, m = divmod(n, k)
-            conv_str = str(m)
             q.appendleft(str(m))
 
         conv_str = ''.join(q)
