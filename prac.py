@@ -7,29 +7,25 @@ from collections import deque
 
 input = sys.stdin.readline
 
-mat = []
-total_spy = -100
-for i in range(9):
-    N = int(input())
-    mat.append(N)
-    total_spy += N
-
-mat.sort()
+N, M = map(int, input().split())
+mat = list(map(int, input().split())) + [0]
 s = 0
-e = 8
-
-while s < e:
+e = 0
+total = mat[0]
+cnt = 0
+while e < N:
     
-    if mat[s] + mat[e] < total_spy:
+    if total < M:
+        e += 1
+        total += mat[e]
+    
+    elif total > M:
+        total -= mat[s]
         s += 1
-    elif mat[s] + mat[e] > total_spy:
-        e -= 1
-    else:
-        break
-
-for i in range(len(mat)):
-    if i == s or i == e:
-        continue
-    print(mat[i])
-
     
+    else:
+        cnt += 1
+        e += 1
+        total += mat[e]
+
+print(cnt)
