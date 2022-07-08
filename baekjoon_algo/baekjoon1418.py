@@ -1,10 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-import sys
-from collections import deque
-
 N = int(input())
 K = int(input())
 #1, 2, 3, 4, 6, 8, 9
