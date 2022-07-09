@@ -5,24 +5,26 @@ import math
 import sys
 from collections import deque
 
-N = int(input())
-K = int(input())
-#1, 2, 3, 4, 6, 8, 9
-cnt = 0
-for i in range(2, N+1):
-    
-    save = i
-    mat = set([1])
-    for j in range(2, i+1):
-        if j * j > i:
-            break
+#지구 태양 달
+#E S M
+#15 28 19
 
-        while save % j == 0:
-            mat.add(j)
-            save //= j
-    mat.add(save)
-    
-    if max(mat) <= K:
-        cnt += 1
+E, S, M = map(int, input().split())
+A, B, C = 1, 1, 1
 
-print(cnt+1)
+cnt = 1
+
+while E != A or S != B or M != C:
+    A += 1
+    B += 1
+    C += 1
+    
+    if A == 16:
+        A = 1
+    if B == 29:
+        B = 1
+    if C == 20:
+        C = 1
+    cnt += 1
+
+print(cnt)
