@@ -5,48 +5,31 @@ import math
 import sys
 from collections import deque
 
-input = sys.stdin.readline
+# input = sys.stdin.readline
+tc = 0
+flag = False
+res = []
+while tc < 102:
+    ans = []
+    new_str = input()
+    if new_str == '*':
+        break
+    if len(new_str) == 1:
+        print(f'{new_str} is surprising.')
+        continue
 
-#TAAGATAC
+    for distance in range(len(new_str) - 2): #D 넘버
+        for i in range(len(new_str)):
+            for j in range(i, len(new_str)):
+                if i == j:
+                    continue
 
-#TATGATAC 1
-#TAAGCTAC 1
-#AAAGATCC 2
-#TGAGATAC 1
-#TAAGATGT 2
+                if j-i-1 == distance:
+                    ans.append(new_str[i] + new_str[j]+str(j-i-1))
 
-#A T G C
+    if len(ans) == len(set(ans)):
+        print(f'{new_str} is surprising.')
+    else:
+        print(f'{new_str} is NOT surprising.')
 
-#[0, 0, 0, 0, 0] => A T G C 넣음. 세로로 가면서 해당하면 리스트 인덱스 증가
-
-N, M = map(int, input().split())
-
-mat = [input() for _ in range(N)]
-dna_dict = {'A':0, 'T':0, 'G':0, 'C': 0}
-
-ans = ''
-cnt = 0
-for i in range(M):
-    for j in range(N):
-        dna_dict[mat[j][i]] += 1
-
-    max_value = -0xffffff
-    cur_str = ''
-    for idx, val in dna_dict.items():
-        if dna_dict[idx] > max_value:
-            max_value = dna_dict[idx]
-            cur_str = idx
-        elif dna_dict[idx] == max_value and ord(idx) < ord(cur_str):
-            max_value = dna_dict[idx]
-            cur_str = idx
-    ans += cur_str
-
-    for j in range(N):
-        if cur_str != mat[j][i]:
-            cnt += 1
-
-    for j in range(N):
-        dna_dict[mat[j][i]] = 0
-            
-print(ans)
-print(cnt)
+    tc += 1
