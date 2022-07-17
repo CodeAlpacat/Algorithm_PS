@@ -6,20 +6,25 @@ import sys
 from collections import deque
 
 # input = sys.stdin.readline
-# 
-str_num = input()
-flag = str_num[0]
-arr = str_num[0]
-for i in range(len(str_num)):
-    if str_num[i] != flag:
-        arr += str_num[i]
-        flag = str_num[i]
-cnt = 0
-if len(arr) == 1:
-    print(0)
-else:
-    save = arr[0:2]
-    for i in range(0, len(arr), 2):
-        if arr[i:i+2] == save:
-            cnt += 1
-    print(cnt)
+
+
+N = int(input())
+
+mat = [list(map(int, input().split())) for _ in range(N)]
+mat.sort()
+res = 0
+for i in range(N):
+    flag = False
+    for j in range(N):
+        if i != j:
+            if mat[i][0] >= mat[j][0] and mat[i][1] >= mat[j][1]:
+                flag = True
+                continue
+            elif mat[i][1] >= mat[j][1] and mat[i][0] >= mat[j][0]:
+                flag = True
+                continue
+    
+    if not flag:
+        res += 1
+
+print(res)
