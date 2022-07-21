@@ -1,12 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-# import sys
-# from collections import deque
-
-# input = sys.stdin.readline
-
 N, K = map(int, input().split())
 
 mat = [True for _ in range(N+1)]
@@ -23,6 +14,7 @@ for i in range(2, N+1):
         if mat[j]:
             mat[j] = False
             cnt += 1
+            print(j, cnt)
         if cnt == K:
             ans = j
             flag = True
