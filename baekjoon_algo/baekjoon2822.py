@@ -1,11 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-# import sys
-from collections import deque
-# input = sys.stdin.readline
-
 li = []
 for i in range(8):
     N = int(input())
@@ -21,4 +13,4 @@ for i in range(5):
 
 ans_list.sort()
 print(ans)
-print(*ans_list)
+print(ans_list)
