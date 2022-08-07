@@ -6,28 +6,8 @@ import math
 from collections import deque
 # input = sys.stdin.readline
 
-N = int(input())
-mat = []
-for i in range(N):
-    mat.append(input())
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
+A.extend(list(map(int, input().split())))
 
-
-mat2 = sorted(mat)
-mat3 = sorted(mat, reverse=True)
-ans = ''
-for i in range(N):
-    if mat[i] != mat2[i]:
-        break
-else:
-    ans = 'INCREASING'
-
-for i in range(N):
-    if mat[i] != mat3[i]:
-        break
-else:
-    ans = 'DECREASING'
-
-if not ans:
-    ans = "NEITHER"
-    
-print(ans)
+print(*sorted(A))
