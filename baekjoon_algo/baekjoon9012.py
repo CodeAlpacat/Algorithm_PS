@@ -1,11 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-# import sys
-from collections import deque
-# input = sys.stdin.readline
-
 N = int(input())
 
 for i in range(N):
@@ -23,5 +15,3 @@ for i in range(N):
         print('NO')
     else:
         print('YES')
-
-        
