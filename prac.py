@@ -6,38 +6,42 @@ import math
 from collections import deque
 # input = sys.stdin.readline
 
-dx = [0, 1, 0, -1]
-dy = [1, 0, -1, 0]
 
-M, N = map(int, input().split())
 
-mat = [list(map(int, list(input()))) for _ in range(M)]
-visited = [[0] * N for _ in range(M)]
+#8 => 4  4 2//N
+#6 0
+#1 0
+#4 0
+#7 2
+#0 5
+#0 8
+#0 3
 
-def bfs(x, y):
+#0은 그대로
+#1은 하나만 겹치게
+#2는 두개가 겹치게
+
+T = int(input())
+
+def recur(cur):
+
     
-    q = deque()
-    q.append([x, y])
-    visited[x][y] = 1
-    while q:
-        x, y = q.popleft()
+
+    for i in range(N//2):
         
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            
-            if 0 <= nx < M and 0 <= ny < N and not visited[nx][ny] and not mat[nx][ny]:
-                visited[nx][ny] = 1
-                q.append([nx, ny])
-    
+        new_arr = []
+        left_deck.extend([0] * i)
+        recur(cur + 1)
+        for j in range(len(right_deck)):
+            if right_deck[j] != 0:
+                new_arr.append(right_deck[j])
+        
     
 
-for i in range(N):
-    bfs(0, i)
 
-for i in range(N):
-    if visited[M-1][i]:
-        print('YES')
-        break
-else:
-    print('NO')
+for tc in range(1, T+1):
+    N = int(input())
+    mat = list(map(int, input().split()))
+    left_deck = mat[:2//len(mat)]
+    right_deck = mat[2//len(mat):]
+    
