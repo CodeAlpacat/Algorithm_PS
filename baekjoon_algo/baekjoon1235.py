@@ -1,9 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-# import sys
-
 N = int(input())
 mat = []
 a = 0
@@ -21,4 +15,3 @@ for i in range(a):
         ans = i + 1
         break
 print(ans)
-    
