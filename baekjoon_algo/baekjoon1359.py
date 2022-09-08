@@ -1,9 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-# import sys
-
 set_li = set()
 N, M, K = map(int, input().split())
 li = []
