@@ -4,30 +4,34 @@ import heapq
 import math
 # import sys
 
-set_li = set()
-N, M, K = map(int, input().split())
-li = []
-total = 0
-pick = 0
-def recur(cur, cnt):
-    global total, pick
+#N 임한수 김지민의 번호
+#1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 
-    if cur == N:
-        if cnt == M:
-            count = 0
-            total += 1
-            for i in range(len(li)):
-                if li[i] <= M:
-                    count += 1
-            if count >= K:
-                pick += 1
-        return
+#2 4 6 8 10 12 14 16
+#1 2 3 4 5  6  7  8
 
-    li.append(cur+1)
-    recur(cur + 1, cnt + 1)
-    li.pop()
+N, A, B = map(int, input().split())
+cnt = 0
+while abs(A - B) and A and B:
+    
+    if A % 2 == 1:
+        A = (A+1) // 2
+    else:
+        A //= 2
+    
+    if B % 2 == 1:
+        B = (B+1) // 2
+    else:
+        B //= 2
 
-    recur(cur + 1, cnt)
+    cnt += 1
+if cnt == N:
+    print(-1)
+else:
+    print(cnt)
 
-recur(0, 0)
-print(pick/total)
+#12
+#6
+#4
+#2
+#1
