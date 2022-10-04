@@ -4,15 +4,19 @@ import heapq
 import math
 # import sys
 
-def solution(s):
-    stack = []
-    for i in s:
-        if i == '(':  # '('는 stack에 추가
-            stack.append(i)
-        else:  # i == ')'인 경우
-            if stack == []:  # 괄호 짝이 ')'로 시작하면 False 반환
-                return False
-            else:
-                stack.pop()  # '('가 ')'와 짝을 이루면 stack에서 '(' 하나 제거
+def solution(n):
+    answer = 1
     
-    return stack==[]
+    for i in range(1, n+1):
+        total = 0
+        for j in range(i, n+1):
+            if total > n:
+                break
+                
+            if total == n:
+                answer += 1
+                break
+                
+            total += j
+        
+    return answer
