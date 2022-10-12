@@ -1,10 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-from audioop import reverse
-import heapq
-import math
-# import sys
-
 
 N = int(input())
 par = [i for i in range(1000010)]
