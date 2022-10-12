@@ -1,12 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-from audioop import reverse
-import heapq
-import math
-# import sys
-
-
-
 N, M = map(int, input().split())
 
 par = [i for i in range(N+1)]
