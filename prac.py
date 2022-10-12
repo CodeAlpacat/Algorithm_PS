@@ -1,12 +1,12 @@
 # sys.stdin=open('sample_input.txt')
 # import collections
-from audioop import reverse
 import heapq
 import math
 # import sys
 
 
-N = int(input())
+import sys
+N = int(sys.stdin.readline())
 par = [i for i in range(1000010)]
 rnk = [0 for i in range(1000010)]
 sz = [1 for i in range(1000010)]
@@ -36,16 +36,12 @@ def union_(a, b):
         par[b] = a
         sz[a] += sz[b]
 
-ans = []
+
 for i in range(N):
-    order = list(input().split())
-    
+    order = list(sys.stdin.readline().split())
+
     if order[0] == 'I':
-        a, b = int(order[1]), int(order[2])
-        union_(a, b)
+        union_(int(order[1]), int(order[2]))
     
     elif order[0] == 'Q':
-        ans.append(sz[int(order[1])])
-
-for i in ans:
-    print(i)
+        print(sz[find_(int(order[1]))])
