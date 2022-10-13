@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
 
 par = [i for i in range(N+1)]
@@ -24,7 +27,7 @@ def union(a, b):
     else:
         rnk[a] += 1
         par[b] = a
-save = []
+
 for i in range(M):
     a, b = map(int, input().split())
     if find(a) != find(b):
