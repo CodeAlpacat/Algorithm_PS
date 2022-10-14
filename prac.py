@@ -2,41 +2,49 @@
 # import collections
 import heapq
 import math
-# import sys
+import sys
+input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
 par = [i for i in range(N+1)]
 rnk = [0 for _ in range(N+1)]
 
-def find(x):
-    if par[x] == x:
-        return x
+def find_(a):
+    if par[a] == a:
+        return a
     else:
-        par[x] = find(par[x])
-        return par[x]
+        par[a] = find_(par[a])
+        return par[a]
 
-def union(a, b):
-    a = find(a)
-    b = find(b)
-    
+def union_(a, b):
+    a = find_(a)
+    b = find_(b)
+
     if a == b:
         return
     
     if rnk[a] < rnk[b]:
         par[a] = b
-    elif rnk[a] > rnk[b]:
+    elif rnk[b] < rnk[a]:
         par[b] = a
     else:
         rnk[a] += 1
         par[b] = a
-save = []
-for i in range(M):
-    a, b = map(int, input().split())
-    if find(a) != find(b):
-        union(a, b)
+
+    
+
+cnt = 0
+for i in range(1, M+1):
+    node_a, node_b = map(int, input().split())
+    #시냅스가 사이클을 이루면 안된다.
+    if find_(node_a) != find_(node_b):
+        union_(node_a, node_b)
     else:
-        print(i+1)
-        break
-else:
-    print(0)
+        cnt += 1
+
+neurons = set()
+for i in range(1, N+1):
+    neurons.add(find_(par[i]))
+
+print(len(neurons) - 1 + cnt)
