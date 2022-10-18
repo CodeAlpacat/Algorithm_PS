@@ -6,8 +6,12 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
+<<<<<<< HEAD
+=======
+node = [0] + [list(map(float, input().split())) for _ in range(N)]
+>>>>>>> 8ced2071645cc2a41e97c4a2df0fc844a518631a
 par = [i for i in range(N+1)]
-rnk = [0 for _ in range(N+1)]
+rnk = [0 for i in range(N+1)]
 
 def _find(x):
     if par[x] == x:
