@@ -1,7 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
 import sys
 input = sys.stdin.readline
 
@@ -51,7 +47,6 @@ for i in range(1, N):
     cnt_mat.append([abs(planet_y[i][0] - planet_y[i-1][0]), planet_y[i][1], planet_y[i-1][1]])
     cnt_mat.append([abs(planet_z[i][0] - planet_z[i-1][0]), planet_z[i][1], planet_z[i-1][1]])
 
-print(cnt_mat)
 cnt_mat.sort()
 
 ans = 0
