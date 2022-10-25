@@ -5,29 +5,24 @@ import math
 import sys
 input = sys.stdin.readline
 
-from collections import deque 
-def solution(queue1, queue2):
-    answer = 0
-    #그리디, 나머지는 시간초과 각
-    queue1 = deque(queue1)
-    queue2 = deque(queue2)
-    sum_q1 = sum(queue1)
-    sum_q2 = sum(queue2)
-    
-    if (sum_q1 + sum_q2) % 2 == 1:
-        return -1
-    
-    for i in range(3 * len(queue1)):
-        if sum_q1 < sum_q2:
-            sum_q1 += queue2[0]
-            sum_q2 -= queue2[0]
-            queue1.append(queue2.popleft())
-        elif sum_q1 > sum_q2:
-            sum_q1 -= queue1[0]
-            sum_q2 += queue1[0]
-            queue2.append(queue1.popleft())
-        else:
-            return answer
-        answer += 1
-            
-    return -1
+N = int(input())
+arr = [[0] * (N + 1)] + [[0] + list(map(int, input().split())) for _ in range(N)]
+prefix = [[[0] * 10 for _ in range(N + 1)] for _ in range(N + 1)]
+
+for i in range(1, N+1):
+    for j in range(1, N+1):
+        for k in range(1, 10):
+            if k == arr[i][j]:
+                prefix[i][j][k] += 1
+            prefix[i][j][k] += prefix[i-1][j][k] + prefix[i][j-1][k] - prefix[i-1][j-1][k]
+
+Q = int(input())
+
+for i in range(Q):
+    a, b, c, d =  map(int, input().split())
+    ans = 0
+    for k in range(1, 10):
+        if prefix[c][d][k] - prefix[c][b - 1][k] - prefix[a-1][d][k] + prefix[a-1][b-1][k]:
+            ans += 1
+
+    print(ans)
