@@ -5,29 +5,19 @@ import math
 import sys
 input = sys.stdin.readline
 
-from collections import deque 
-def solution(queue1, queue2):
-    answer = 0
-    #그리디, 나머지는 시간초과 각
-    queue1 = deque(queue1)
-    queue2 = deque(queue2)
-    sum_q1 = sum(queue1)
-    sum_q2 = sum(queue2)
-    
-    if (sum_q1 + sum_q2) % 2 == 1:
-        return -1
-    
-    for i in range(3 * len(queue1)):
-        if sum_q1 < sum_q2:
-            sum_q1 += queue2[0]
-            sum_q2 -= queue2[0]
-            queue1.append(queue2.popleft())
-        elif sum_q1 > sum_q2:
-            sum_q1 -= queue1[0]
-            sum_q2 += queue1[0]
-            queue2.append(queue1.popleft())
-        else:
-            return answer
-        answer += 1
-            
-    return -1
+N, M = map(int, input().split())
+arr = [0] + list(map(int, input().split()))
+prefix = [0 for i in range(N+1)]
+cnt = {}
+
+for i in range(1, N+1):
+    prefix[i] = prefix[i-1] + arr[i]
+
+ans = 0
+for i in range(N+1):
+    # ans += cnt[prefix[i]-M]
+    ans += cnt.get(prefix[i]-M, 0)
+
+    cnt[prefix[i]] = cnt.get(prefix[i], 0) + 1
+
+print(ans)
