@@ -1,10 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
-import sys
-input = sys.stdin.readline
-
 N = int(input())
 mat = list(map(int, input().split()))
 M = int(input())
