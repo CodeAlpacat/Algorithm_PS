@@ -5,15 +5,19 @@ import math
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-mat = list(map(int, input().split()))
-M = int(input())
-cards = list(map(int, input().split()))
+N, M = map(int, input().split())
+woods = list(map(int, input().split()))
+s, e = 1, max(woods)
 
-cnt = {}
+while s <= e:
+    m = (s+e) // 2
 
-for i in range(N):
-    cnt[mat[i]] = cnt.get(mat[i], 0) + 1
-
-for i in range(M):
-    print(cnt.get(cards[i], 0), end=' ')
+    a = 0
+    for i in woods:
+        if i >= m:
+            a += i - m
+    if a >= M:
+        s = m + 1
+    else:
+        e = m - 1
+print(e)
