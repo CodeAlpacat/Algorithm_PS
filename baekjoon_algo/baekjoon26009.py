@@ -1,7 +1,3 @@
-# sys.stdin=open('sample_input.txt')
-# import collections
-import heapq
-import math
 import sys
 from collections import deque
 
@@ -56,6 +52,8 @@ for i in range(K):
             if C+j-1 <= M-1:
                 mat[R+D-j-1][C+j-1] = 1
     
+for i in mat:
+    print(*i)
 min_dist = min(min_dist, bfs(0, 0))
 
 if min_dist < -100000:
