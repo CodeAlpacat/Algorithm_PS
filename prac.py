@@ -7,28 +7,37 @@ from collections import deque
 
 input = sys.stdin.readline
 
-# '('가 추가되면 count += 1
-# 누적으로 쌓이다가 ')'가 등장하면 '('를 제거하고 count만큼 result에 더함
-mat = list(input())
-stack = [mat.pop(0)]
-result = 0
-count = 1
-while mat:
-    if stack[-1] == '(':
-        if mat[0] == ')':
-            count -= 1
-            result += count
-        elif mat[0] == '(':
-            count += 1
+# N = int(input())
+# start = math.floor(math.sqrt(N))
+# memo = [[-1] * (N + 1)  for _ in range(start+1)]
+# def dp(cur, total):
+    
+#     if cur < 0:
+#         return 0xffffff
+#     # 
+#     if total > N:
+#         return 0xffffff
+    
+#     if total == N:
+#         return 0
+    
+#     if memo[cur][total] != -1:
+#         return memo[cur][total]
 
-    elif stack[-1] == ')':
-        if mat[0] == ')':
-            count -= 1
-            result += 1
-        if mat[0] == '(':
-            count += 1
+#     memo[cur][total] = min(dp(cur + 1, total + cur ** 2) + 1, dp(cur - 1, total))
+#     return memo[cur][total]
 
-    #(가 나왔을 때,
-    stack.append(mat.pop(0))
+# print(dp(start, 0))
+n = int(input())
+d = [0] * (n + 1)
+d[0], d[1] = 0, 1
 
-print(result)
+for i in range(2, n + 1):
+    minValue = 1e9
+    j = 1
+    while (j ** 2) <= i:
+        minValue = min(minValue, d[i - (j ** 2)])
+        j += 1
+    d[i] = minValue + 1
+
+print(d[n])
